@@ -1,39 +1,52 @@
-import { useState, useEffect } from 'react';
-import { Instagram, MapPin, Clock, Phone, Menu, X } from 'lucide-react';
+import { useState } from 'react';
+import { Menu, X, ShoppingBag, ArrowRight } from 'lucide-react';
 import { menuData } from './data';
 
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  // Selected items for the premium product grid
+  const premiumProducts = [
+    { name: "Croissant aux Amandes", price: "8,00 DH", category: "Viennoiserie", img: "https://images.unsplash.com/photo-1623366302587-bca20583cc4a?auto=format&fit=crop&w=600&q=80" },
+    { name: "Entremets Tout Chocolat", price: "29,00 DH", category: "Pâtisserie", img: "https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=600&q=80" },
+    { name: "Plateau Macaron", price: "350,00 DH", category: "Plateaux", img: "https://images.unsplash.com/photo-1569864358642-9d1684040f43?auto=format&fit=crop&w=600&q=80" },
+    { name: "Quiche Saumon", price: "13,00 DH", category: "Salés", img: "https://images.unsplash.com/photo-1481391243136-17482607f2ef?auto=format&fit=crop&w=600&q=80" },
+    { name: "Mini Plateau Donuts", price: "75,00 DH", category: "Plateaux", img: "https://images.unsplash.com/photo-1551024601-bec78aea704b?auto=format&fit=crop&w=600&q=80" },
+    { name: "Cake au Miel", price: "15,00 DH", category: "Pâtisserie", img: "https://images.unsplash.com/photo-1557308536-ee471ef2c390?auto=format&fit=crop&w=600&q=80" },
+  ];
 
   return (
-    <div className="min-h-screen bg-white font-sans text-brand-900 selection:bg-brand-900 selection:text-white">
+    <div className="min-h-screen bg-white font-sans text-gray-800 selection:bg-crave-orange selection:text-white">
       {/* Navigation */}
-      <nav className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-black/90 backdrop-blur-md py-2' : 'bg-transparent py-6'}`}>
+      <nav className="absolute w-full z-50 py-6">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center">
             <div className="flex-shrink-0 flex items-center">
-              <img src="/logo.png" alt="Maison Gougou" className={`h-12 md:h-16 w-auto transition-all ${scrolled ? 'invert brightness-0' : 'invert brightness-0'}`} style={{ filter: 'invert(1) brightness(200%)' }} />
+              <img src="/logo.png" alt="Maison Gougou" className="h-12 w-auto invert brightness-0" style={{ filter: 'invert(1)' }} />
             </div>
             
             {/* Desktop Nav */}
-            <div className="hidden md:flex space-x-12">
-              <a href="#accueil" className="text-white hover:text-gray-300 text-xs font-semibold tracking-[0.2em] uppercase transition-colors">Accueil</a>
-              <a href="#art" className="text-white hover:text-gray-300 text-xs font-semibold tracking-[0.2em] uppercase transition-colors">À Propos</a>
-              <a href="#menu-1" className="text-white hover:text-gray-300 text-xs font-semibold tracking-[0.2em] uppercase transition-colors">Menu</a>
-              <a href="#contact" className="text-white hover:text-gray-300 text-xs font-semibold tracking-[0.2em] uppercase transition-colors">Contact</a>
+            <div className="hidden md:flex space-x-8 items-center bg-white/10 px-8 py-3 rounded-full backdrop-blur-sm border border-white/20">
+              <a href="#home" className="text-white hover:text-crave-orange text-sm font-medium transition-colors">Accueil</a>
+              <a href="#products" className="text-white hover:text-crave-orange text-sm font-medium transition-colors">Produits</a>
+              <a href="#about" className="text-white hover:text-crave-orange text-sm font-medium transition-colors">À Propos</a>
+              <a href="#menu" className="text-white hover:text-crave-orange text-sm font-medium transition-colors">Menu Complet</a>
+            </div>
+
+            <div className="hidden md:flex items-center space-x-4">
+              <button className="text-white hover:text-crave-orange transition-colors">
+                <ShoppingBag size={24} />
+              </button>
+              <a href="#contact" className="bg-crave-orange hover:bg-orange-600 text-white px-6 py-2.5 rounded-full text-sm font-medium transition-colors shadow-lg shadow-crave-orange/30">
+                Contact
+              </a>
             </div>
 
             {/* Mobile menu button */}
-            <div className="md:hidden flex items-center">
+            <div className="md:hidden flex items-center space-x-4">
+              <button className="text-white">
+                <ShoppingBag size={24} />
+              </button>
               <button 
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
                 className="text-white focus:outline-none"
@@ -46,179 +59,176 @@ function App() {
 
         {/* Mobile Nav */}
         {isMenuOpen && (
-          <div className="md:hidden bg-black/95 border-t border-gray-800">
+          <div className="md:hidden bg-crave-brown absolute top-full left-0 w-full border-t border-white/10 shadow-xl">
             <div className="px-4 pt-4 pb-6 space-y-4 text-center">
-              <a href="#accueil" onClick={() => setIsMenuOpen(false)} className="block text-sm font-semibold tracking-widest uppercase text-white">Accueil</a>
-              <a href="#art" onClick={() => setIsMenuOpen(false)} className="block text-sm font-semibold tracking-widest uppercase text-white">À Propos</a>
-              <a href="#menu-1" onClick={() => setIsMenuOpen(false)} className="block text-sm font-semibold tracking-widest uppercase text-white">Menu</a>
-              <a href="#contact" onClick={() => setIsMenuOpen(false)} className="block text-sm font-semibold tracking-widest uppercase text-white">Contact</a>
+              <a href="#home" onClick={() => setIsMenuOpen(false)} className="block text-base font-medium text-white">Accueil</a>
+              <a href="#products" onClick={() => setIsMenuOpen(false)} className="block text-base font-medium text-white">Produits</a>
+              <a href="#about" onClick={() => setIsMenuOpen(false)} className="block text-base font-medium text-white">À Propos</a>
+              <a href="#menu" onClick={() => setIsMenuOpen(false)} className="block text-base font-medium text-white">Menu Complet</a>
+              <a href="#contact" onClick={() => setIsMenuOpen(false)} className="inline-block bg-crave-orange text-white px-8 py-3 rounded-full mt-4">Contact</a>
             </div>
           </div>
         )}
       </nav>
 
       {/* Hero Section */}
-      <section id="accueil" className="relative h-screen flex items-center justify-center bg-black">
-        <div 
-          className="absolute inset-0 bg-cover bg-center opacity-60"
-          style={{ backgroundImage: "url('https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&q=80')" }}
-        ></div>
-        <div className="relative z-10 text-center px-4 w-full max-w-4xl mx-auto mt-20">
-          <h1 className="text-6xl md:text-8xl font-serif text-white mb-6 leading-tight shadow-sm">
-            Fait avec amour
-          </h1>
-          <p className="text-lg md:text-xl text-gray-200 mb-10 max-w-2xl mx-auto font-light leading-relaxed">
-            Une gamme très vaste, un multichoix de goûts et un très bon service. Découvrez nos créations uniques et nos classiques revisités dans un cadre moderne.
-          </p>
-          <a href="#menu-1" className="inline-block border border-white text-white px-10 py-4 text-xs font-semibold tracking-[0.2em] uppercase hover:bg-white hover:text-black transition-colors">
-            Notre Menu
-          </a>
+      <section id="home" className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 bg-crave-brown overflow-hidden">
+        {/* Background decorative elements */}
+        <div className="absolute top-20 right-10 opacity-10">
+           <svg width="120" height="120" viewBox="0 0 24 24" fill="white"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
         </div>
-      </section>
-
-      {/* Art of Cakes Section */}
-      <section id="art" className="py-24 bg-[#fafafa]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <div className="order-2 lg:order-1 px-4 lg:px-12 text-center lg:text-left">
-              <h2 className="text-4xl md:text-5xl font-serif text-brand-900 mb-4">L'art de la pâtisserie</h2>
-              <p className="text-xs font-semibold tracking-[0.2em] uppercase text-gray-500 mb-8">Nous créons de délicieux souvenirs</p>
-              
-              <p className="text-gray-600 mb-10 font-light leading-relaxed">
-                Située au cœur de Casablanca (Hay Raja 1), Maison Gougou est une pâtisserie artisanale dédiée à la création de douceurs d'exception. Notre vitrine vous propose chaque jour une grande variété de pâtisseries, gâteaux, viennoiseries et créations salées.
+        
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <div className="inline-flex items-center space-x-2 bg-white/10 px-4 py-2 rounded-full mb-6 border border-white/20">
+                <span className="text-crave-yellow">★</span>
+                <span className="font-semibold text-white">3.9</span>
+                <span className="text-white/80 text-sm">(70 avis)</span>
+              </div>
+              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-[1.1]">
+                Pâtisserie d'Exception, <br />
+                <span className="text-crave-yellow font-serif italic">Bouchée par Bouchée</span>
+              </h1>
+              <p className="text-lg text-white/80 mb-10 max-w-lg font-light leading-relaxed">
+                Apportez de la joie avec nos délices faits maison. Des créations uniques pour des moments uniques au cœur de Casablanca.
               </p>
-              
-              <div className="flex items-center justify-center lg:justify-start space-x-6 border-t border-b border-gray-200 py-6">
-                <span className="font-serif italic text-gray-500">Chef</span>
-                <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-brand-900">
-                  <img src="https://images.unsplash.com/photo-1583338917451-fade2751022d?auto=format&fit=crop&w=150&q=80" alt="Chef Simo" className="w-full h-full object-cover" />
-                </div>
-                <span className="font-serif italic text-gray-500">Simo</span>
-              </div>
-              
-              <div className="mt-8">
-                <p className="text-2xl font-serif text-brand-900 italic">"Des créations uniques pour des occasions uniques."</p>
-              </div>
-            </div>
-            
-            <div className="order-1 lg:order-2">
-              <div className="grid grid-cols-2 gap-4 p-4 bg-white shadow-xl">
-                <img src="https://images.unsplash.com/photo-1550617931-e17a7b70dce2?auto=format&fit=crop&q=80" alt="Cake" className="w-full h-48 md:h-64 object-cover" />
-                <img src="https://images.unsplash.com/photo-1464195244916-405fa0a82545?auto=format&fit=crop&q=80" alt="Ingredients" className="w-full h-48 md:h-64 object-cover" />
-                <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&q=80" alt="Cake Slice" className="w-full h-48 md:h-64 object-cover" />
-                <div className="bg-brand-900 flex items-center justify-center text-center p-6">
-                  <p className="text-white font-serif text-2xl md:text-3xl">TELLEMENT<br/>BON !</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Feature Section with Background */}
-      <section className="relative py-32 bg-black">
-        <div 
-          className="absolute inset-0 bg-cover bg-center opacity-40"
-          style={{ backgroundImage: "url('https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&q=80')" }}
-        ></div>
-        <div className="relative z-10 max-w-5xl mx-auto px-4">
-          <div className="bg-white p-2 md:p-4 shadow-2xl flex flex-col md:flex-row">
-            <div className="w-full md:w-1/2">
-              <img src="https://images.unsplash.com/photo-1557308536-ee471ef2c390?auto=format&fit=crop&q=80" alt="Pastry" className="w-full h-64 md:h-full object-cover" />
-            </div>
-            <div className="w-full md:w-1/2 p-8 md:p-12 flex flex-col justify-center">
-              <h2 className="text-4xl font-serif text-brand-900 mb-2">Pâtisserie Fine</h2>
-              <p className="text-xs font-semibold tracking-[0.2em] uppercase text-brand-500 mb-6">Nos favoris</p>
-              <p className="text-gray-600 mb-8 font-light leading-relaxed">
-                Que vous cherchiez un Pain Suisse réconfortant, un de nos fameux New-York Rolls, ou un magnifique Entremets pour une occasion spéciale, nous avons ce qu'il vous faut.
-              </p>
-              <div className="flex space-x-1 text-brand-900">
-                ★★★★★
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Menu Section 1 (Dark Background) */}
-      <section id="menu-1" className="relative py-24 bg-[#1a1a1a]">
-        <div 
-          className="absolute inset-0 bg-cover bg-center opacity-20"
-          style={{ backgroundImage: "url('https://images.unsplash.com/photo-1508424757105-b6d5ad9329d0?auto=format&fit=crop&q=80')" }}
-        ></div>
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-            
-            <div className="lg:col-span-8 text-white pr-0 lg:pr-12">
-              <h2 className="text-4xl md:text-5xl font-serif mb-2 text-center lg:text-left">Viennoiserie</h2>
-              <p className="text-xs font-semibold tracking-[0.2em] uppercase text-gray-400 mb-12 text-center lg:text-left">Chaque matin dès 06h00</p>
-              
-              <div className="space-y-8">
-                {menuData.viennoiserie.slice(0, 8).map((item, idx) => (
-                  <div key={idx} className="text-center lg:text-left">
-                    <h3 className="text-xl font-serif mb-1">{item.name}</h3>
-                    <p className="text-xs text-gray-400 uppercase tracking-widest mb-2">Fait maison</p>
-                    <p className="text-2xl font-serif text-[#d4af37]">{item.price}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-            
-            <div className="lg:col-span-4 mt-12 lg:mt-0">
-              <div className="bg-[#f5f5f0] p-10 text-center shadow-xl">
-                <div className="w-16 h-16 mx-auto mb-6 opacity-30">
-                  <img src="/logo.png" alt="Icon" className="w-full h-full object-contain filter invert" />
-                </div>
-                <h3 className="text-3xl font-serif text-brand-900 mb-6">Éveillez vos sens</h3>
-                <p className="text-gray-600 font-light leading-relaxed mb-8">
-                  Découvrez nos délicieuses créations, du classique croissant aux créations signatures de notre chef.
-                </p>
-                <a href="https://www.instagram.com/maison.gougou/?hl=en" target="_blank" rel="noopener noreferrer" className="inline-block border border-brand-900 text-brand-900 px-8 py-3 text-xs font-semibold tracking-[0.2em] uppercase hover:bg-brand-900 hover:text-white transition-colors">
-                  Voir Plus
+              <div className="flex flex-col sm:flex-row gap-4">
+                <a href="#products" className="inline-flex justify-center items-center px-8 py-4 bg-crave-orange text-white text-base font-medium rounded-full shadow-lg shadow-crave-orange/30 hover:bg-orange-600 transition-all hover:scale-105">
+                  Commander
+                </a>
+                <a href="#menu" className="inline-flex justify-center items-center px-8 py-4 text-white text-base font-medium rounded-full hover:bg-white/10 transition-colors">
+                  Voir le menu <ArrowRight className="ml-2 w-5 h-5" />
                 </a>
               </div>
             </div>
             
+            <div className="relative mt-12 lg:mt-0">
+              <div className="relative w-full aspect-square max-w-lg mx-auto">
+                <div className="absolute inset-0 bg-crave-orange/20 rounded-full blur-3xl"></div>
+                <img 
+                  src="https://images.unsplash.com/photo-1549903072-7e6e0d6510cb?auto=format&fit=crop&w=800&q=80" 
+                  alt="Croissants" 
+                  className="relative z-10 w-full h-full object-cover rounded-[3rem] shadow-2xl border-4 border-white/10 transform rotate-3 hover:rotate-0 transition-transform duration-500"
+                />
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Menu Section 2 (Light Background) */}
-      <section className="py-24 bg-white">
+      {/* Premium Products Section */}
+      <section id="products" className="py-24 bg-crave-light">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-serif text-brand-900 mb-2">Pâtisserie & Salés</h2>
-            <p className="text-xs font-semibold tracking-[0.2em] uppercase text-gray-500">Les incontournables de Maison Gougou</p>
+            <h2 className="text-4xl font-bold text-crave-brown mb-6">Nos Produits Premium</h2>
+            <div className="flex flex-wrap justify-center gap-4">
+              <button className="px-6 py-2 bg-crave-brown text-white rounded-full text-sm font-medium">Tout</button>
+              <button className="px-6 py-2 bg-white text-gray-600 rounded-full text-sm font-medium hover:bg-gray-100 shadow-sm">Viennoiserie</button>
+              <button className="px-6 py-2 bg-white text-gray-600 rounded-full text-sm font-medium hover:bg-gray-100 shadow-sm">Pâtisserie</button>
+              <button className="px-6 py-2 bg-white text-gray-600 rounded-full text-sm font-medium hover:bg-gray-100 shadow-sm">Salés</button>
+            </div>
           </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
-            <div>
-              <div className="flex items-center mb-10">
-                <h3 className="text-2xl font-serif text-brand-900 tracking-widest uppercase">Articles Salés</h3>
-                <div className="h-px bg-gray-200 flex-grow ml-6"></div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {premiumProducts.map((product, idx) => (
+              <div key={idx} className="bg-white p-6 rounded-3xl shadow-sm hover:shadow-xl transition-shadow border border-gray-100 group">
+                <div className="relative h-64 mb-6 overflow-hidden rounded-2xl bg-gray-50">
+                  <img src={product.img} alt={product.name} className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500" />
+                  <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-semibold text-crave-brown">
+                    {product.category}
+                  </div>
+                </div>
+                <div className="text-center">
+                  <h3 className="text-xl font-bold text-crave-brown mb-2">{product.name}</h3>
+                  <p className="text-crave-orange font-bold text-xl mb-4">{product.price}</p>
+                  <button className="w-full py-3 bg-gray-50 hover:bg-crave-orange hover:text-white text-crave-brown rounded-xl font-medium transition-colors flex items-center justify-center gap-2 group-hover:shadow-md">
+                    <ShoppingBag size={18} /> Ajouter
+                  </button>
+                </div>
               </div>
-              <ul className="space-y-6">
-                {menuData.articlesSales.slice(0, 10).map((item, idx) => (
-                  <li key={idx} className="flex justify-between items-baseline group">
-                    <span className="font-serif text-lg text-brand-800">{item.name}</span>
-                    <div className="border-b border-gray-300 flex-grow mx-4 border-dotted group-hover:border-brand-400 transition-colors"></div>
-                    <span className="font-serif text-xl text-[#d4af37] whitespace-nowrap">{item.price}</span>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Bite into our Best Section */}
+      <section id="about" className="py-24 bg-crave-yellow">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="bg-white/40 rounded-[3rem] p-8 lg:p-16 border border-white/60 shadow-xl shadow-crave-yellow/50 backdrop-blur-sm">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+              <div className="relative">
+                <img 
+                  src="https://images.unsplash.com/photo-1583338917451-fade2751022d?auto=format&fit=crop&w=800&q=80" 
+                  alt="Baker" 
+                  className="rounded-3xl shadow-2xl w-full h-[500px] object-cover"
+                />
+                <div className="absolute -bottom-8 -right-8 bg-white p-6 rounded-2xl shadow-xl max-w-xs hidden md:block">
+                  <h4 className="font-bold text-crave-brown mb-2">Fait Maison</h4>
+                  <p className="text-sm text-gray-600">Préparé chaque matin avec passion et ingrédients frais.</p>
+                </div>
+              </div>
+              
+              <div>
+                <h2 className="text-4xl lg:text-5xl font-bold text-crave-brown mb-6">Croquez dans l'Excellence</h2>
+                <p className="text-lg text-gray-700 mb-8 leading-relaxed">
+                  Notre équipe de passionnés, menée par le Chef Simo, s'engage à vous offrir une expérience gustative inoubliable. Chaque création est le fruit d'un savoir-faire artisanal et d'une sélection rigoureuse de nos ingrédients.
+                </p>
+                
+                <div className="bg-white p-6 rounded-2xl shadow-sm mb-8">
+                  <div className="flex items-center gap-4 mb-4">
+                    <div className="w-12 h-12 bg-crave-orange/10 rounded-full flex items-center justify-center text-crave-orange">
+                      <span className="font-bold">SM</span>
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-crave-brown">Chef Simo</h4>
+                      <p className="text-sm text-gray-500">Artisan Pâtissier</p>
+                    </div>
+                  </div>
+                  <p className="italic text-gray-600">"La pâtisserie est un art qui se déguste d'abord avec les yeux, puis avec le cœur."</p>
+                </div>
+
+                <a href="#menu" className="inline-block bg-crave-orange text-white px-8 py-4 rounded-full font-medium hover:bg-orange-600 transition-colors shadow-lg shadow-crave-orange/30">
+                  Découvrir notre histoire
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Menu complet list */}
+      <section id="menu" className="py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-crave-brown mb-4">Menu Complet</h2>
+            <p className="text-gray-600">Toutes nos délices disponibles en boutique.</p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-12">
+            <div>
+              <h3 className="text-2xl font-bold text-crave-brown mb-6 flex items-center gap-3">
+                <span className="w-8 h-1 bg-crave-orange rounded-full"></span> Viennoiserie
+              </h3>
+              <ul className="space-y-4">
+                {menuData.viennoiserie.slice(0, 10).map((item, idx) => (
+                  <li key={idx} className="flex justify-between items-center border-b border-gray-100 pb-3">
+                    <span className="font-medium text-gray-800">{item.name}</span>
+                    <span className="font-bold text-crave-orange bg-orange-50 px-3 py-1 rounded-full">{item.price}</span>
                   </li>
                 ))}
               </ul>
             </div>
             
             <div>
-              <div className="flex items-center mb-10">
-                <h3 className="text-2xl font-serif text-brand-900 tracking-widest uppercase">Pâtisserie</h3>
-                <div className="h-px bg-gray-200 flex-grow ml-6"></div>
-              </div>
-              <ul className="space-y-6">
+              <h3 className="text-2xl font-bold text-crave-brown mb-6 flex items-center gap-3">
+                <span className="w-8 h-1 bg-crave-orange rounded-full"></span> Pâtisserie
+              </h3>
+              <ul className="space-y-4">
                 {menuData.patisserie.slice(0, 10).map((item, idx) => (
-                  <li key={idx} className="flex justify-between items-baseline group">
-                    <span className="font-serif text-lg text-brand-800">{item.name}</span>
-                    <div className="border-b border-gray-300 flex-grow mx-4 border-dotted group-hover:border-brand-400 transition-colors"></div>
-                    <span className="font-serif text-xl text-[#d4af37] whitespace-nowrap">{item.price} DH</span>
+                  <li key={idx} className="flex justify-between items-center border-b border-gray-100 pb-3">
+                    <span className="font-medium text-gray-800">{item.name}</span>
+                    <span className="font-bold text-crave-orange bg-orange-50 px-3 py-1 rounded-full">{item.price} DH</span>
                   </li>
                 ))}
               </ul>
@@ -227,46 +237,53 @@ function App() {
         </div>
       </section>
 
-      {/* Footer / Contact */}
-      <footer id="contact" className="bg-[#1a1a1a] text-white pt-20 pb-10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col items-center mb-16">
-             <img src="/logo.png" alt="Maison Gougou" className="h-20 mb-8" style={{ filter: 'invert(1) brightness(200%)' }} />
-             <div className="flex space-x-6 text-sm font-semibold tracking-widest uppercase text-gray-400">
-               <a href="#accueil" className="hover:text-white transition-colors">Accueil</a>
-               <a href="#art" className="hover:text-white transition-colors">À Propos</a>
-               <a href="#menu-1" className="hover:text-white transition-colors">Menu</a>
-             </div>
+      {/* Footer */}
+      <footer id="contact" className="bg-crave-red pt-32 pb-12 relative overflow-hidden">
+        {/* Floating elements top */}
+        <div className="absolute top-0 left-0 w-full flex justify-around opacity-20 -translate-y-1/2">
+           <img src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=200&q=80" className="w-48 h-48 rounded-full object-cover" />
+           <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=200&q=80" className="w-64 h-64 rounded-full object-cover" />
+           <img src="https://images.unsplash.com/photo-1551024601-bec78aea704b?auto=format&fit=crop&w=200&q=80" className="w-48 h-48 rounded-full object-cover" />
+        </div>
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="bg-white/10 backdrop-blur-md rounded-3xl p-12 text-center text-white mb-16 border border-white/20">
+            <h2 className="text-3xl md:text-4xl font-bold mb-6">Prêt pour de délicieuses pâtisseries ?</h2>
+            <p className="text-white/80 mb-8 max-w-xl mx-auto">
+              Rejoignez-nous en boutique pour déguster nos créations, ou passez commande par téléphone pour vos événements.
+            </p>
+            <a href="tel:0661178024" className="inline-block bg-white text-crave-red px-10 py-4 rounded-full font-bold text-lg hover:bg-crave-yellow transition-colors shadow-xl">
+              06 61 17 80 24
+            </a>
           </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 text-center md:text-left border-t border-gray-800 pt-12">
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 text-white/90">
             <div>
-              <h4 className="font-serif text-xl mb-6 text-[#d4af37]">Nous trouver</h4>
-              <p className="text-gray-400 font-light leading-relaxed">
-                N 95, Hay Raja 1, <br/>Av. Said Abou Jemaa, <br/>Casablanca
-              </p>
+              <img src="/logo.png" alt="Maison Gougou" className="h-16 mb-6 invert brightness-0" style={{ filter: 'invert(1)' }} />
+              <p className="font-light mb-6">N 95, Hay Raja 1, <br/>Av. Said Abou Jemaa, Casablanca</p>
             </div>
-            <div className="text-center">
-              <h4 className="font-serif text-xl mb-6 text-[#d4af37]">Contact</h4>
-              <p className="text-gray-400 font-light leading-relaxed mb-4">
-                Téléphone: <br/>06 61 17 80 24
-              </p>
-              <div className="flex justify-center space-x-4">
-                <a href="https://www.instagram.com/maison.gougou/?hl=en" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">
-                  <Instagram size={24} />
+            
+            <div className="md:text-center">
+              <h4 className="font-bold text-xl mb-6 text-white">Liens Rapides</h4>
+              <ul className="space-y-3">
+                <li><a href="#home" className="hover:text-crave-yellow transition-colors">Accueil</a></li>
+                <li><a href="#products" className="hover:text-crave-yellow transition-colors">Produits</a></li>
+                <li><a href="#about" className="hover:text-crave-yellow transition-colors">À Propos</a></li>
+              </ul>
+            </div>
+            
+            <div className="md:text-right">
+              <h4 className="font-bold text-xl mb-6 text-white">Horaires</h4>
+              <p className="font-light mb-6">Ouvert tous les jours<br/>06:00 - Fermeture</p>
+              <div className="flex justify-end space-x-4">
+                <a href="https://www.instagram.com/maison.gougou/?hl=en" className="bg-white/20 p-3 rounded-full hover:bg-white hover:text-crave-red transition-all">
+                  <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
                 </a>
               </div>
             </div>
-            <div className="md:text-right">
-              <h4 className="font-serif text-xl mb-6 text-[#d4af37]">Horaires</h4>
-              <p className="text-gray-400 font-light leading-relaxed">
-                Lundi - Dimanche<br/>
-                06:00 - Fermeture
-              </p>
-            </div>
           </div>
           
-          <div className="text-center mt-16 text-xs tracking-widest text-gray-600 uppercase">
+          <div className="border-t border-white/20 mt-12 pt-8 text-center text-white/60 text-sm">
             &copy; {new Date().getFullYear()} Maison Gougou. Tous droits réservés.
           </div>
         </div>
