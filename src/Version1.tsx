@@ -140,105 +140,84 @@ function Version1() {
         </div>
       </section>
 
-      {/* Menu Section 1 (Dark Background) */}
-      <section id="menu-1" className="relative py-24 bg-[#1a1a1a]">
-        <div 
-          className="absolute inset-0 bg-cover bg-center opacity-20"
-          style={{ backgroundImage: "url('https://images.unsplash.com/photo-1508424757105-b6d5ad9329d0?auto=format&fit=crop&q=80')" }}
-        ></div>
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-            
-            <div className="lg:col-span-8 text-white pr-0 lg:pr-12">
-              <h2 className="text-4xl md:text-5xl font-serif mb-2 text-center lg:text-left">Viennoiserie</h2>
-              <p className="text-xs font-semibold tracking-[0.2em] uppercase text-gray-400 mb-12 text-center lg:text-left">Chaque matin dès 06h00</p>
-              
-              <div className="space-y-8">
-                {menuData.viennoiserie.slice(0, 8).map((item, idx) => (
-                  <div key={idx} className="text-center lg:text-left">
-                    <h3 className="text-xl font-serif mb-1">{item.name}</h3>
-                    <p className="text-xs text-gray-400 uppercase tracking-widest mb-2">Fait maison</p>
-                    <p className="text-2xl font-serif text-[#d4af37]">{item.price}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-            
-            <div className="lg:col-span-4 mt-12 lg:mt-0">
-              <div className="bg-[#f5f5f0] p-10 text-center shadow-xl">
-                <div className="w-16 h-16 mx-auto mb-6 opacity-30">
-                  <img src="/logo.png" alt="Icon" className="w-full h-full object-contain filter invert" />
-                </div>
-                <h3 className="text-3xl font-serif text-brand-900 mb-6">Éveillez vos sens</h3>
-                <p className="text-gray-600 font-light leading-relaxed mb-8">
-                  Découvrez nos délicieuses créations, du classique croissant aux créations signatures de notre chef.
-                </p>
-                <a href="https://www.instagram.com/maison.gougou/?hl=en" target="_blank" rel="noopener noreferrer" className="inline-block border border-brand-900 text-brand-900 px-8 py-3 text-xs font-semibold tracking-[0.2em] uppercase hover:bg-brand-900 hover:text-white transition-colors">
-                  Voir Plus
-                </a>
-              </div>
-            </div>
-            
-          </div>
-        </div>
-      </section>
-
-      {/* Menu Section 2 (Light Background) */}
-      <section className="py-24 bg-white">
+      {/* Menu Section (Clean & Minimalist) */}
+      <section id="menu-1" className="py-24 bg-[#fafafa]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-serif text-brand-900 mb-2">Pâtisserie & Salés</h2>
-            <p className="text-xs font-semibold tracking-[0.2em] uppercase text-gray-500">Les incontournables de Maison Gougou</p>
+          <div className="text-center mb-20">
+            <h2 className="text-4xl md:text-5xl font-serif text-brand-900 mb-4">Notre Menu</h2>
+            <div className="w-24 h-px bg-brand-900 mx-auto opacity-30"></div>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-24 gap-y-16">
+            
+            {/* Viennoiserie */}
             <div>
-              <div className="flex items-center mb-10">
-                <h3 className="text-2xl font-serif text-brand-900 tracking-widest uppercase">Articles Salés</h3>
-                <div className="h-px bg-gray-200 flex-grow ml-6"></div>
-              </div>
+              <h3 className="text-3xl font-serif text-brand-900 mb-10 text-center lg:text-left">Viennoiserie</h3>
               <ul className="space-y-6">
-                {menuData.articlesSales.slice(0, 10).map((item, idx) => (
-                  <li key={idx} className="flex justify-between items-baseline group">
-                    <span className="font-serif text-lg text-brand-800">{item.name}</span>
-                    <div className="border-b border-gray-300 flex-grow mx-4 border-dotted group-hover:border-brand-400 transition-colors"></div>
-                    <span className="font-serif text-xl text-[#d4af37] whitespace-nowrap">{item.price}</span>
+                {menuData.viennoiserie.slice(0, 10).map((item, idx) => (
+                  <li key={idx} className="flex justify-between items-start border-b border-gray-200 pb-4">
+                    <div className="flex flex-col">
+                      <span className="font-serif text-lg text-brand-900">{item.name}</span>
+                      <span className="text-xs text-gray-500 uppercase tracking-widest mt-1">Fait maison</span>
+                    </div>
+                    <span className="font-serif text-lg text-brand-700 ml-4">{item.price}</span>
                   </li>
                 ))}
               </ul>
             </div>
             
+            {/* Pâtisserie */}
             <div>
-              <div className="flex items-center mb-10">
-                <h3 className="text-2xl font-serif text-brand-900 tracking-widest uppercase">Pâtisserie</h3>
-                <div className="h-px bg-gray-200 flex-grow ml-6"></div>
-              </div>
+              <h3 className="text-3xl font-serif text-brand-900 mb-10 text-center lg:text-left">Pâtisserie</h3>
               <ul className="space-y-6">
                 {menuData.patisserie.slice(0, 10).map((item, idx) => (
-                  <li key={idx} className="flex justify-between items-baseline group">
-                    <span className="font-serif text-lg text-brand-800">{item.name}</span>
-                    <div className="border-b border-gray-300 flex-grow mx-4 border-dotted group-hover:border-brand-400 transition-colors"></div>
-                    <span className="font-serif text-xl text-[#d4af37] whitespace-nowrap">{item.price} DH</span>
+                  <li key={idx} className="flex justify-between items-start border-b border-gray-200 pb-4">
+                    <div className="flex flex-col">
+                      <span className="font-serif text-lg text-brand-900">{item.name}</span>
+                      <span className="text-xs text-gray-500 uppercase tracking-widest mt-1">Spécialité du chef</span>
+                    </div>
+                    <span className="font-serif text-lg text-brand-700 ml-4">{item.price} DH</span>
                   </li>
                 ))}
               </ul>
             </div>
 
+            {/* Articles Salés */}
             <div>
-              <div className="flex items-center mb-10">
-                <h3 className="text-2xl font-serif text-brand-900 tracking-widest uppercase">Plateaux</h3>
-                <div className="h-px bg-gray-200 flex-grow ml-6"></div>
-              </div>
+              <h3 className="text-3xl font-serif text-brand-900 mb-10 text-center lg:text-left">Articles Salés</h3>
               <ul className="space-y-6">
-                {menuData.plateaux.slice(0, 10).map((item, idx) => (
-                  <li key={idx} className="flex justify-between items-baseline group">
-                    <span className="font-serif text-lg text-brand-800">{item.name}</span>
-                    <div className="border-b border-gray-300 flex-grow mx-4 border-dotted group-hover:border-brand-400 transition-colors"></div>
-                    <span className="font-serif text-xl text-[#d4af37] whitespace-nowrap">{item.price} DH</span>
+                {menuData.articlesSales.slice(0, 10).map((item, idx) => (
+                  <li key={idx} className="flex justify-between items-start border-b border-gray-200 pb-4">
+                    <div className="flex flex-col">
+                      <span className="font-serif text-lg text-brand-900">{item.name}</span>
+                    </div>
+                    <span className="font-serif text-lg text-brand-700 ml-4">{item.price}</span>
                   </li>
                 ))}
               </ul>
             </div>
+
+            {/* Plateaux */}
+            <div>
+              <h3 className="text-3xl font-serif text-brand-900 mb-10 text-center lg:text-left">Plateaux</h3>
+              <ul className="space-y-6">
+                {menuData.plateaux.slice(0, 10).map((item, idx) => (
+                  <li key={idx} className="flex justify-between items-start border-b border-gray-200 pb-4">
+                    <div className="flex flex-col">
+                      <span className="font-serif text-lg text-brand-900">{item.name}</span>
+                    </div>
+                    <span className="font-serif text-lg text-brand-700 ml-4">{item.price} DH</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+          </div>
+          
+          <div className="mt-20 text-center">
+             <a href="#contact" className="inline-block border border-brand-900 text-brand-900 px-10 py-4 text-xs font-semibold tracking-[0.2em] uppercase hover:bg-brand-900 hover:text-white transition-colors">
+                Passer une commande
+             </a>
           </div>
         </div>
       </section>
