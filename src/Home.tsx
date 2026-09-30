@@ -157,13 +157,13 @@ function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="bg-white/40 rounded-[2rem] sm:rounded-[3rem] p-6 sm:p-10 lg:p-16 border border-white/60 shadow-xl shadow-crave-yellow/50 backdrop-blur-sm">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 sm:gap-16 items-center">
-              <div className="relative order-2 lg:order-1">
+              <div className="relative order-2 lg:order-1 h-64 sm:h-96 lg:h-[500px] bg-gradient-to-t from-crave-orange/20 to-transparent rounded-[2rem] sm:rounded-[3rem] border border-white/40 flex items-end justify-center overflow-visible">
                 <img 
-                  src="https://images.unsplash.com/photo-1556742059-47b93231f536?auto=format&fit=crop&w=800&q=80" 
-                  alt="Baker" 
-                  className="rounded-2xl sm:rounded-3xl shadow-2xl w-full h-64 sm:h-96 lg:h-[500px] object-cover"
+                  src="/chef-simo.png" 
+                  alt="Chef Simo" 
+                  className="w-full h-[110%] object-contain object-bottom drop-shadow-2xl"
                 />
-                <div className="absolute -bottom-6 -right-6 sm:-bottom-8 sm:-right-8 bg-white p-4 sm:p-6 rounded-2xl shadow-xl max-w-[200px] sm:max-w-xs hidden sm:block">
+                <div className="absolute -bottom-6 -right-6 sm:-bottom-8 sm:-right-8 bg-white p-4 sm:p-6 rounded-2xl shadow-xl max-w-[200px] sm:max-w-xs hidden sm:block z-10">
                   <h4 className="font-bold text-crave-brown mb-1 sm:mb-2 text-sm sm:text-base">Fait Maison</h4>
                   <p className="text-xs sm:text-sm text-gray-600">Préparé chaque matin avec passion et ingrédients frais.</p>
                 </div>

@@ -90,8 +90,8 @@ function Version1() {
               
               <div className="flex items-center justify-center lg:justify-start space-x-6 border-t border-b border-gray-200 py-6">
                 <span className="font-serif italic text-gray-500">Chef</span>
-                <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-brand-900">
-                  <img src="https://images.unsplash.com/photo-1583338917451-fade2751022d?auto=format&fit=crop&w=150&q=80" alt="Chef Simo" className="w-full h-full object-cover" />
+                <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-brand-900 bg-gray-100">
+                  <img src="/chef-simo.png" alt="Chef Simo" className="w-full h-full object-cover object-top" />
                 </div>
                 <span className="font-serif italic text-gray-500">Simo</span>
               </div>
