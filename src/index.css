@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply font-sans text-brand-900 bg-brand-50;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif font-bold text-brand-900;
+  }
+}
