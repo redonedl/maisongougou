@@ -17,11 +17,11 @@ function App() {
     };
   }, []);
 
-  if (currentPath === '/version_2') {
-    return <Home />;
+  if (currentPath === '/version_1') {
+    return <Version1 />;
   }
 
-  return <Version1 />;
+  return <Home />;
 }
 
 export default App;
