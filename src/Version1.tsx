@@ -191,7 +191,7 @@ function Version1() {
             <p className="text-xs font-semibold tracking-[0.2em] uppercase text-gray-500">Les incontournables de Maison Gougou</p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
             <div>
               <div className="flex items-center mb-10">
                 <h3 className="text-2xl font-serif text-brand-900 tracking-widest uppercase">Articles Salés</h3>
@@ -215,6 +215,22 @@ function Version1() {
               </div>
               <ul className="space-y-6">
                 {menuData.patisserie.slice(0, 10).map((item, idx) => (
+                  <li key={idx} className="flex justify-between items-baseline group">
+                    <span className="font-serif text-lg text-brand-800">{item.name}</span>
+                    <div className="border-b border-gray-300 flex-grow mx-4 border-dotted group-hover:border-brand-400 transition-colors"></div>
+                    <span className="font-serif text-xl text-[#d4af37] whitespace-nowrap">{item.price} DH</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div>
+              <div className="flex items-center mb-10">
+                <h3 className="text-2xl font-serif text-brand-900 tracking-widest uppercase">Plateaux</h3>
+                <div className="h-px bg-gray-200 flex-grow ml-6"></div>
+              </div>
+              <ul className="space-y-6">
+                {menuData.plateaux.slice(0, 10).map((item, idx) => (
                   <li key={idx} className="flex justify-between items-baseline group">
                     <span className="font-serif text-lg text-brand-800">{item.name}</span>
                     <div className="border-b border-gray-300 flex-grow mx-4 border-dotted group-hover:border-brand-400 transition-colors"></div>

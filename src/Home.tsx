@@ -235,6 +235,34 @@ function Home() {
                 ))}
               </ul>
             </div>
+            
+            <div>
+              <h3 className="text-xl sm:text-2xl font-bold text-crave-brown mb-6 flex items-center gap-3">
+                <span className="w-6 sm:w-8 h-1 bg-crave-orange rounded-full"></span> Plateaux
+              </h3>
+              <ul className="space-y-3 sm:space-y-4">
+                {menuData.plateaux.slice(0, 10).map((item, idx) => (
+                  <li key={idx} className="flex justify-between items-center border-b border-gray-100 pb-2 sm:pb-3">
+                    <span className="font-medium text-gray-800 text-sm sm:text-base">{item.name}</span>
+                    <span className="font-bold text-crave-orange bg-orange-50 px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm whitespace-nowrap ml-2">{item.price} DH</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div>
+              <h3 className="text-xl sm:text-2xl font-bold text-crave-brown mb-6 flex items-center gap-3">
+                <span className="w-6 sm:w-8 h-1 bg-crave-orange rounded-full"></span> Articles Salés
+              </h3>
+              <ul className="space-y-3 sm:space-y-4">
+                {menuData.articlesSales.slice(0, 10).map((item, idx) => (
+                  <li key={idx} className="flex justify-between items-center border-b border-gray-100 pb-2 sm:pb-3">
+                    <span className="font-medium text-gray-800 text-sm sm:text-base">{item.name}</span>
+                    <span className="font-bold text-crave-orange bg-orange-50 px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm whitespace-nowrap ml-2">{item.price} DH</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
       </section>
