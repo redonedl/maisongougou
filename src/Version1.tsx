@@ -5,6 +5,7 @@ import { menuData } from './data';
 function Version1() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [activeTab, setActiveTab] = useState<'viennoiserie' | 'patisserie' | 'articlesSales' | 'plateaux'>('viennoiserie');
 
   useEffect(() => {
     const handleScroll = () => {
@@ -140,78 +141,50 @@ function Version1() {
         </div>
       </section>
 
-      {/* Menu Section (Clean & Minimalist) */}
+      {/* Menu Section (Clean & Minimalist Tabbed) */}
       <section id="menu-1" className="py-24 bg-[#fafafa]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-20">
+          <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-serif text-brand-900 mb-4">Notre Menu</h2>
-            <div className="w-24 h-px bg-brand-900 mx-auto opacity-30"></div>
+            <div className="w-24 h-px bg-brand-900 mx-auto opacity-30 mb-12"></div>
+            
+            {/* Tabs Navigation */}
+            <div className="flex flex-wrap justify-center gap-4 sm:gap-8 mb-16">
+              {[
+                { id: 'viennoiserie', label: 'Viennoiserie' },
+                { id: 'patisserie', label: 'Pâtisserie' },
+                { id: 'articlesSales', label: 'Articles Salés' },
+                { id: 'plateaux', label: 'Plateaux' },
+              ].map((tab) => (
+                <button
+                  key={tab.id}
+                  onClick={() => setActiveTab(tab.id as any)}
+                  className={`text-sm sm:text-base tracking-[0.2em] uppercase transition-all duration-300 pb-2 border-b-2 ${
+                    activeTab === tab.id
+                      ? 'border-brand-900 text-brand-900 font-semibold'
+                      : 'border-transparent text-gray-400 hover:text-brand-600'
+                  }`}
+                >
+                  {tab.label}
+                </button>
+              ))}
+            </div>
           </div>
           
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-24 gap-y-16">
-            
-            {/* Viennoiserie */}
-            <div>
-              <h3 className="text-3xl font-serif text-brand-900 mb-10 text-center lg:text-left">Viennoiserie</h3>
-              <ul className="space-y-6">
-                {menuData.viennoiserie.slice(0, 10).map((item, idx) => (
-                  <li key={idx} className="flex justify-between items-start border-b border-gray-200 pb-4">
-                    <div className="flex flex-col">
-                      <span className="font-serif text-lg text-brand-900">{item.name}</span>
-                      <span className="text-xs text-gray-500 uppercase tracking-widest mt-1">Fait maison</span>
-                    </div>
-                    <span className="font-serif text-lg text-brand-700 ml-4">{item.price}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            
-            {/* Pâtisserie */}
-            <div>
-              <h3 className="text-3xl font-serif text-brand-900 mb-10 text-center lg:text-left">Pâtisserie</h3>
-              <ul className="space-y-6">
-                {menuData.patisserie.slice(0, 10).map((item, idx) => (
-                  <li key={idx} className="flex justify-between items-start border-b border-gray-200 pb-4">
-                    <div className="flex flex-col">
-                      <span className="font-serif text-lg text-brand-900">{item.name}</span>
-                      <span className="text-xs text-gray-500 uppercase tracking-widest mt-1">Spécialité du chef</span>
-                    </div>
-                    <span className="font-serif text-lg text-brand-700 ml-4">{item.price} DH</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Articles Salés */}
-            <div>
-              <h3 className="text-3xl font-serif text-brand-900 mb-10 text-center lg:text-left">Articles Salés</h3>
-              <ul className="space-y-6">
-                {menuData.articlesSales.slice(0, 10).map((item, idx) => (
-                  <li key={idx} className="flex justify-between items-start border-b border-gray-200 pb-4">
-                    <div className="flex flex-col">
-                      <span className="font-serif text-lg text-brand-900">{item.name}</span>
-                    </div>
-                    <span className="font-serif text-lg text-brand-700 ml-4">{item.price}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Plateaux */}
-            <div>
-              <h3 className="text-3xl font-serif text-brand-900 mb-10 text-center lg:text-left">Plateaux</h3>
-              <ul className="space-y-6">
-                {menuData.plateaux.slice(0, 10).map((item, idx) => (
-                  <li key={idx} className="flex justify-between items-start border-b border-gray-200 pb-4">
-                    <div className="flex flex-col">
-                      <span className="font-serif text-lg text-brand-900">{item.name}</span>
-                    </div>
-                    <span className="font-serif text-lg text-brand-700 ml-4">{item.price} DH</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 lg:gap-x-24 gap-y-6">
+            {menuData[activeTab].map((item, idx) => (
+              <div key={idx} className="flex justify-between items-start border-b border-gray-200 pb-4 hover:border-brand-400 transition-colors">
+                <div className="flex flex-col pr-4">
+                  <span className="font-serif text-lg text-brand-900">{item.name}</span>
+                  {(activeTab === 'viennoiserie' || activeTab === 'patisserie') && (
+                    <span className="text-xs text-gray-500 uppercase tracking-widest mt-1">
+                      {activeTab === 'viennoiserie' ? 'Fait maison' : 'Spécialité du chef'}
+                    </span>
+                  )}
+                </div>
+                <span className="font-serif text-lg text-brand-700 whitespace-nowrap">{item.price.includes('DH') ? item.price : `${item.price} DH`}</span>
+              </div>
+            ))}
           </div>
           
           <div className="mt-20 text-center">
